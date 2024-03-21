@@ -3,9 +3,10 @@ import asyncio
 import os.path
 
 from aiogram import Bot, Dispatcher
-from aiogram.fsm.storage.redis import RedisStorage, Redis
-from handlers import command_handler, user_handler
+from aiogram.fsm.storage.redis import Redis, RedisStorage
+
 from admin_insight_bot_container import assistant_repository, config_data
+from handlers import command_handler, user_handler
 from keyboards.main_menu import set_main_menu
 
 

@@ -1,14 +1,20 @@
-from aiogram import Router, F
+from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import StatesGroup, State
-from aiogram.types import Message,  CallbackQuery
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.types import CallbackQuery, Message
 
 from DB.Mongo.mongo_db import MongoAssistantRepositoryORM
 from DB.Mongo.mongo_enteties import Assistant
-from keyboards.callback_fabric import AssistantRedactCallbackFactory, AssistantDeleteCallbackFactory, \
-    AssistantRedactOptionCallbackFactory
-from keyboards.inline_keyboards import crete_inline_keyboard_assistants_actions, \
-    crete_inline_keyboard_redact_actions, crete_inline_keyboard_options
+from keyboards.callback_fabric import (
+    AssistantDeleteCallbackFactory,
+    AssistantRedactCallbackFactory,
+    AssistantRedactOptionCallbackFactory,
+)
+from keyboards.inline_keyboards import (
+    crete_inline_keyboard_assistants_actions,
+    crete_inline_keyboard_options,
+    crete_inline_keyboard_redact_actions,
+)
 
 router = Router()
 

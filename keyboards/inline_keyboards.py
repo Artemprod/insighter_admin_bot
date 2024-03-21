@@ -2,9 +2,12 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from DB.Mongo.mongo_db import MongoAssistantRepositoryORM
 from DB.Mongo.mongo_enteties import Assistant
-from keyboards.callback_fabric import AssistantRedactCallbackFactory, AssistantDeleteCallbackFactory, \
-    AssistantRedactOptionCallbackFactory
-from keyboards.callback_fabric import AssistantCallbackFactory
+from keyboards.callback_fabric import (
+    AssistantCallbackFactory,
+    AssistantDeleteCallbackFactory,
+    AssistantRedactCallbackFactory,
+    AssistantRedactOptionCallbackFactory,
+)
 
 
 def crete_inline_keyboard_all_assistants(assistant_repository: MongoAssistantRepositoryORM):
@@ -64,13 +67,9 @@ def crete_inline_keyboard_assistants_actions(assistant: Assistant):
 
 def crete_inline_keyboard_redact_actions(assistant_repository: MongoAssistantRepositoryORM, assistant_id: str):
     assistant: Assistant = assistant_repository.get_one_assistant(assistant_id=assistant_id)
-    assistant_fields = [field_name for field_name in assistant._fields_ordered if
-                        field_name != "id"
-                        and field_name != "created_at"
-                        and field_name != "assistant_id"
-                        and field_name != "button_name"
-                        and field_name != "assistant"]
-    print()
+    excluded_fields = {"id", "created_at", "assistant_id", "button_name", "assistant"}
+    assistant_fields = [field_name for field_name in assistant._fields_ordered if field_name not in excluded_fields]
+
     fil_dic = {
         "name": "Заголовок",
         "assistant_prompt": "Системный промпт",

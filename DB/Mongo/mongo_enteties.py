@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, DateTimeField, IntField, DictField, ListField, DecimalField, FloatField
+from mongoengine import DateTimeField, DecimalField, DictField, Document, FloatField, IntField, ListField, StringField
 
 
 class Assistant(Document):

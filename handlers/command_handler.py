@@ -1,12 +1,8 @@
+from aiogram import Router
 from aiogram.filters import CommandStart
-from aiogram import Router, Bot
 from aiogram.types import Message
 
-
 from keyboards.inline_keyboards import crete_inline_keyboard_options
-
-
-
 
 router = Router()
 
