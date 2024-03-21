@@ -17,4 +17,4 @@ RUN poetry config virtualenvs.create false && poetry install --no-root
 
 COPY . ./
 ENTRYPOINT ["poetry", "run"]
-CMD ["python3", "bot.py"]
+CMD ["python", "bot.py"]
