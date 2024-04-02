@@ -5,7 +5,7 @@ from loguru import logger
 
 def load_loguru():
     env: Env = Env()
-    env.read_env(".env")
+    env.read_env("deploy/.env")
     logtail_source_token = env("LOGTAIL_INSIGHTER_ADMIN_SOURCE")
     logtail_handler = LogtailHandler(source_token=logtail_source_token)
     logger.add(
