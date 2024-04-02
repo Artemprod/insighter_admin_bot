@@ -22,7 +22,7 @@ async def main() -> None:
 
     # Добовляем хэгдлеры в диспечтер через роутеры
     dp: Dispatcher = Dispatcher(storage=storage,
-                                 root_dir=root_dir,
+                                root_dir=root_dir,
                                 assistant_repository=assistant_repository)
     dp.include_router(command_handler.router)
     dp.include_router(user_handler.router)
