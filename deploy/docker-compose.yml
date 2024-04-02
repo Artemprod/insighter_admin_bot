@@ -38,3 +38,6 @@ volumes:
   mongodb:
   redis_admin_volume:
 
+networks:
+  app_network:
+    external: true
