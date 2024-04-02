@@ -19,4 +19,3 @@ def load_loguru():
 
 
 loguru_main_logger = load_loguru()
-
