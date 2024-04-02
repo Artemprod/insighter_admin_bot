@@ -3,6 +3,7 @@ import asyncio
 import os.path
 
 from aiogram import Bot, Dispatcher
+from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.redis import Redis, RedisStorage
 
 from admin_insight_bot_container import assistant_repository, config_data
@@ -18,7 +19,8 @@ async def main() -> None:
                   port=config.redis_storage.admin_bot_docker_port)
     storage: RedisStorage = RedisStorage(redis=redis)
 
-    bot: Bot = Bot(token=config.AdminBot.tg_bot_token, parse_mode='HTML')
+    bot: Bot = Bot(token=config.AdminBot.tg_bot_token,
+                   default=DefaultBotProperties(parse_mode="HTML"))
 
     # Добовляем хэгдлеры в диспечтер через роутеры
     dp: Dispatcher = Dispatcher(storage=storage,
