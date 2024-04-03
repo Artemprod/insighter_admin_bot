@@ -30,8 +30,6 @@ async def main() -> None:
     dp.include_router(user_handler.router)
     await set_main_menu(bot)
     await bot.delete_webhook(drop_pending_updates=True)
-
-
     # Запускаем прослушку бота
     await dp.start_polling(bot)
 
