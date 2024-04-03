@@ -34,6 +34,7 @@ jobs:
         - name: Add env
           run: |
             echo $ENV_FILE >> deploy/.env
+            echo deploy/.env
         - name: Run script
           run: poetry run python bot.py
  #Билд и заливка докер имиджа в регестри
