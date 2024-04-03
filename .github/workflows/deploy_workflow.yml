@@ -5,6 +5,7 @@ on:
       - dev
 env:
   ENV_FILE: ${{vars.ENV_FILE}}
+
 jobs:
     lint:
       runs-on: ubuntu-latest
