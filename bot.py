@@ -31,6 +31,7 @@ async def main() -> None:
     await set_main_menu(bot)
     await bot.delete_webhook(drop_pending_updates=True)
 
+
     # Запускаем прослушку бота
     await dp.start_polling(bot)
 
