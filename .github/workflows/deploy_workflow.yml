@@ -29,7 +29,7 @@ jobs:
         - name: Install dependencies
           run: poetry install --no-root
         - name: Run script
-          run: poetry run bot.py
+          run: poetry run python bot.py
  #Билд и заливка докер имиджа в регестри
     build:
       runs-on: ubuntu-latest
