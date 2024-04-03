@@ -26,7 +26,7 @@ services:
     image: docker.io/artemprod/insighter_bot_admin:${IMAGE_TAG:-latest} # удобно чтобы посомтреть чтобы соответсвовать коммиту
     restart: always
     env_file:
-      - .env
+      - ../.env
     networks:
       - app_network
     depends_on:
