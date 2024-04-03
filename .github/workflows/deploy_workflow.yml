@@ -28,6 +28,8 @@ jobs:
           run: pipx install poetry
         - name: Install dependencies
           run: poetry install --no-root
+        - name: Add env
+          run: $ENV_FILE >> deploy/.env
         - name: Run script
           run: poetry run python bot.py
  #Билд и заливка докер имиджа в регестри
