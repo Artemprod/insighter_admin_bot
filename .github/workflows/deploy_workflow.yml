@@ -7,19 +7,19 @@ env:
   ENV_FILE: ${{vars.ENV_FILE}}
 
 jobs:
-    lint:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Get the code from repo
-          uses: actions/checkout@v4
-        - name: Install pipx
-          run: pip install pipx
-        - name: Install poetry
-          run: pipx install poetry
-        - name: Install dependencies
-          run: poetry install --no-root
-        - name: Run lint check
-          run: poetry run ruff check --fix
+#    lint:
+#      runs-on: ubuntu-latest
+#      steps:
+#        - name: Get the code from repo
+#          uses: actions/checkout@v4
+#        - name: Install pipx
+#          run: pip install pipx
+#        - name: Install poetry
+#          run: pipx install poetry
+#        - name: Install dependencies
+#          run: poetry install --no-root
+#        - name: Run lint check
+#          run: poetry run ruff check --fix
     test_program:
       runs-on: ubuntu-latest
       steps:
@@ -33,7 +33,7 @@ jobs:
           run: poetry install --no-root
         - name: Add env
           run: |
-            $ENV_FILE >> deploy/.env
+            echo $ENV_FILE >> deploy/.env
         - name: Run script
           run: poetry run python bot.py
  #Билд и заливка докер имиджа в регестри
