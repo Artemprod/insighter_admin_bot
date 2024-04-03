@@ -27,6 +27,7 @@ def load_loguru():
         print(f'Файл найден: {file_path_norm}')
         env: Env = Env()
         env.read_env(file_path_norm)
+        print()
         logtail_source_token = env.str("LOGTAIL_INSIGHTER_ADMIN_SOURCE")
         logtail_handler = LogtailHandler(source_token=logtail_source_token)
         logger.add(
