@@ -1,5 +1,6 @@
 name: Insighter admin deployment
 on:
+  workflow_dispatch:
   push:
     branches:
       - dev
