@@ -23,39 +23,39 @@ jobs:
 #          run: poetry run ruff check --fix
 
  #Билд и заливка докер имиджа в регестри
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Set up QEMU
-          uses: docker/setup-qemu-action@v3
-        - name: Set up Docker Buildx
-          uses: docker/setup-buildx-action@v3
-        - name: Login to Docker Hub
-          uses: docker/login-action@v3
-          with:
-            username: ${{secrets.DOCKERHUB_USERNAME}}
-            password: ${{secrets.DOCKERHUB_PASSWORD}}
-        - name: Docker meta
-          id: meta
-          uses: docker/metadata-action@v5
-          with:
-            # list of Docker images to use as base name for tags
-            images: |
-              artemprod/insighter_bot_admin
-            # generate Docker tags based on the following events/attributes
-            tags: |
-              type=ref,event=branch
-              type=sha
-        - name: Build and push
-          uses: docker/build-push-action@v5
-          with:
-            cache-from: type=gha
-            cache-to: type=gha,mode=max
-            context: .
-            push: true
-            tags: ${{steps.meta.outputs.tags}}
+#    build:
+#      runs-on: ubuntu-latest
+#      steps:
+#        - name: Checkout
+#          uses: actions/checkout@v4
+#        - name: Set up QEMU
+#          uses: docker/setup-qemu-action@v3
+#        - name: Set up Docker Buildx
+#          uses: docker/setup-buildx-action@v3
+#        - name: Login to Docker Hub
+#          uses: docker/login-action@v3
+#          with:
+#            username: ${{secrets.DOCKERHUB_USERNAME}}
+#            password: ${{secrets.DOCKERHUB_PASSWORD}}
+#        - name: Docker meta
+#          id: meta
+#          uses: docker/metadata-action@v5
+#          with:
+#            # list of Docker images to use as base name for tags
+#            images: |
+#              artemprod/insighter_bot_admin
+#            # generate Docker tags based on the following events/attributes
+#            tags: |
+#              type=ref,event=branch
+#              type=sha
+#        - name: Build and push
+#          uses: docker/build-push-action@v5
+#          with:
+#            cache-from: type=gha
+#            cache-to: type=gha,mode=max
+#            context: .
+#            push: true
+#            tags: ${{steps.meta.outputs.tags}}
  #pull и деплой на серевере
     deploy_docker:
       runs-on: ubuntu-latest
@@ -68,24 +68,23 @@ jobs:
               deploy/docker-compose.yml
             sparse-checkout-cone-mode: false
 
-        - name: Set short sha
-          id: set_sha
-          run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-        - name: Load SSH aws key
-          uses: webfactory/ssh-agent@v0.9.0
-          with:
-            ssh-private-key: ${{ secrets.AWS_PRIVATE_KEY }}
-        - name: Add SSH key to known_hosts
-          run: ssh-keyscan -H ec2-65-1-130-15.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+#        - name: Set short sha
+#          id: set_sha
+#          run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+#        - name: Load SSH aws key
+#          uses: webfactory/ssh-agent@v0.9.0
+#          with:
+#            ssh-private-key: ${{ secrets.AWS_PRIVATE_KEY }}
+#        - name: Add SSH key to known_hosts
+#          run: ssh-keyscan -H ec2-65-1-130-15.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
 
         - name: Deploy
           run: |
             ls
-            echo $ENV_FILE >> deploy/.env
-            echo deploy/.env
-            docker context create stage_context --docker "host=ssh://ubuntu@ec2-65-1-130-15.ap-south-1.compute.amazonaws.com" || true
-            export IMAGE_TAG=sha-${{ steps.set_sha.outputs.sha_short }}
-            docker --context stage_context compose -f deploy/docker-compose.yml up -d --wait --wait-timeout 60
+#            echo $ENV_FILE >> deploy/.env
+#            docker context create stage_context --docker "host=ssh://ubuntu@ec2-65-1-130-15.ap-south-1.compute.amazonaws.com" || true
+#            export IMAGE_TAG=sha-${{ steps.set_sha.outputs.sha_short }}
+#            docker --context stage_context compose -f deploy/docker-compose.yml up -d --wait --wait-timeout 60
   
 
 
