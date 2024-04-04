@@ -21,13 +21,13 @@ def find_file(filename, search_path):
 
 
 def load_loguru():
+    print(os.listdir('../'))
     file_path = find_file('.env', '../')
     if file_path:
         file_path_norm = os.path.normpath(file_path)
         print(f'Файл найден: {file_path_norm}')
         env: Env = Env()
         env.read_env(file_path_norm)
-        print()
         logtail_source_token = env.str("LOGTAIL_INSIGHTER_ADMIN_SOURCE")
         logtail_handler = LogtailHandler(source_token=logtail_source_token)
         logger.add(

@@ -37,15 +37,12 @@ class SystemType:
     system_type: str
 
 
-
-
 @dataclass
 class Config:
     data_base: MongoDB
     redis_storage: RedisStorage
     AdminBot: AdminTelegramBot
     system: SystemType
-
 
 
 def load_bot_config(path) -> Config:
