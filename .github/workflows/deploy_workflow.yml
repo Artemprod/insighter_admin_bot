@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - dev
-env:
-  ENV_FILE: ${{vars.ENV_FILE}}
+
 
 jobs:
 #    lint:
@@ -80,10 +79,11 @@ jobs:
 
         - name: Deploy
           run: |
-            echo $ENV_FILE >> ./deploy/.env
+            echo ${{vars.ENV_FILE}} >> ./deploy/.env
             cat ./deploy/.env
             docker context create stage_context --docker "host=ssh://ubuntu@ec2-65-1-130-15.ap-south-1.compute.amazonaws.com" || true
             export IMAGE_TAG=sha-${{ steps.set_sha.outputs.sha_short }}
+            docker --context stage_context compose -f deploy/docker-compose.yml down
             docker --context stage_context compose -f deploy/docker-compose.yml up -d --wait --wait-timeout 60
   
 
