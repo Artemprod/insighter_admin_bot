@@ -39,7 +39,7 @@ def load_loguru():
         )
         return logger
     else:
-        print('Файл не найден.')
+        print('Файл не найден...')
 
 
 loguru_main_logger = load_loguru()
