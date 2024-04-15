@@ -79,12 +79,11 @@ jobs:
         - name: Deploy
           run: |
             echo "${{vars.PRODUCTION_ENV_FILE}}" >> ./deploy/prod/.env
-            docker context create prod_context --docker "host=ssh://${{vars.PRODUCTION_SERVER_SSH_ROUTE}}"" || true
+            docker context create prod_context --docker "host=ssh://${{vars.PRODUCTION_SERVER_SSH_ROUTE}}" || true
             docker --context prod_context compose -f deploy/prod/docker-compose.yml down insight_telegram_admin
             docker --context prod_context system prune -af
             export IMAGE_TAG=sha-${{ steps.set_sha.outputs.sha_short }}
             docker --context prod_context compose -f deploy/prod/docker-compose.yml up -d --wait --wait-timeout 60
-  
 
 
 
