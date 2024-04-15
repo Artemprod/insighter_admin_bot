@@ -3,6 +3,7 @@ import asyncio
 import os.path
 
 from aiogram import Bot, Dispatcher
+from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.redis import Redis, RedisStorage
 
 from admin_insight_bot_container import assistant_repository, config_data
@@ -18,17 +19,17 @@ async def main() -> None:
                   port=config.redis_storage.admin_bot_docker_port)
     storage: RedisStorage = RedisStorage(redis=redis)
 
-    bot: Bot = Bot(token=config.AdminBot.tg_bot_token, parse_mode='HTML')
+    bot: Bot = Bot(token=config.AdminBot.tg_bot_token,
+                   default=DefaultBotProperties(parse_mode="HTML"))
 
     # Добовляем хэгдлеры в диспечтер через роутеры
     dp: Dispatcher = Dispatcher(storage=storage,
-                                 root_dir=root_dir,
+                                root_dir=root_dir,
                                 assistant_repository=assistant_repository)
     dp.include_router(command_handler.router)
     dp.include_router(user_handler.router)
     await set_main_menu(bot)
     await bot.delete_webhook(drop_pending_updates=True)
-
     # Запускаем прослушку бота
     await dp.start_polling(bot)
 

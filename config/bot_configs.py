@@ -31,9 +31,11 @@ class RedisStorage:
     admin_bot_docker_port: int
     admin_bot_docker_host: Union[int, str]
 
+
 @dataclass
 class SystemType:
     system_type: str
+
 
 @dataclass
 class Config:
@@ -46,7 +48,6 @@ class Config:
 def load_bot_config(path) -> Config:
     env: Env = Env()
     env.read_env(path)
-
 
     return Config(
         system=SystemType(system_type=env('SYSTEM')),
