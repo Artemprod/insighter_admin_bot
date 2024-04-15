@@ -12,18 +12,9 @@ services:
       - redis_admin_volume:/DB/Redis/admin/data/db
     command: [ "redis-server", "--port", "7084" ]
 
-  mongo_insight:
-    image: mongo
-    ports:
-      - "7080:27017"
-    restart: always
-    volumes:
-      - mongodb:/DB/Mongo/data/db
-    networks:
-      - app_network
 
   insight_telegram_admin:
-    image: docker.io/artemprod/insighter_bot_admin:${IMAGE_TAG:-latest} # удобно чтобы посомтреть чтобы соответсвовать коммиту
+    image: docker.io/artemprod/insighter_bot_admin:${IMAGE_TAG:-latest}
     restart: always
     env_file:
       - .env
@@ -35,7 +26,6 @@ services:
 
 
 volumes:
-  mongodb:
   redis_admin_volume:
 
 networks:
