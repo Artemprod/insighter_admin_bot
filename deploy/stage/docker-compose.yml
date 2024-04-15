@@ -22,11 +22,10 @@ services:
       - stage_network
     depends_on:
       - redis_admin
-      - mongo_insight
+
 
 
 volumes:
-  mongodb:
   redis_admin_volume:
 
 networks:
