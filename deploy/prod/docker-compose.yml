@@ -12,7 +12,6 @@ services:
       - redis_admin_volume:/DB/Redis/admin/data/db
     command: [ "redis-server", "--port", "7084" ]
 
-
   insight_telegram_admin:
     image: docker.io/artemprod/insighter_bot_admin:${IMAGE_TAG:-latest}
     restart: always
